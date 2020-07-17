@@ -43,6 +43,11 @@ class TeasController extends Controller
         $reposne=$client->request('get',"$access_token");
         $content=$reposne->getBody();
         echo $content;
+    }
 
+    public function www(){
+        $url="http://www.1911.com/teas3";
+        $reposen=file_get_contents($url);
+        echo $reposen;
     }
 }
