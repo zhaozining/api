@@ -29,4 +29,4 @@ Route::get("/register","User\RegisterController@register");
 Route::post("/registerdo","User\RegisterController@registerdo");
 
 //个人中心
-Route::post("/userCenter","User\LoginController@userCenter");
+Route::get("/userCenter","User\LoginController@userCenter");

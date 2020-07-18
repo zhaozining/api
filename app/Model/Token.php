@@ -9,5 +9,5 @@ class Token extends Model
     public $table="token";
     protected  $primaryKey="id";
     public $timestamps=false;
-    protected  $fillable=["token","time","out_time"];
+    protected  $fillable=["token","time","user_id"];
 }
