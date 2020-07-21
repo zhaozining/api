@@ -30,3 +30,7 @@ Route::post("/registerdo","User\RegisterController@registerdo");
 
 //个人中心
 Route::get("/userCenter","User\LoginController@userCenter");
+
+//哈希
+Route::get("/hash","Ce\TeasController@hash");
+Route::get("/hash2","Ce\TeasController@hash2");
