@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\User;
 use App\Model\Token;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
 
 class LoginController extends Controller
@@ -111,11 +112,18 @@ class LoginController extends Controller
             if ($res) {
                 //获取用户信息
                 $user = User::where(['user_id' => $res->user_id])->first();
+                //签到
+                $sign="sign_in";
+
+                //访问量
+                $count="counts";
 
                 $response=[
                     'name'=>$user->name,
                     'error'=>0,
-                    'msg'=>"个人中心"
+                    'msg'=>"个人中心",
+                    'sing'=>Redis::zincrby($sign,time(),"ning"),
+                    'count'=>Redis::hincrby($count,'count',1)
                 ];
             }else{
                 $response=[
@@ -124,7 +132,6 @@ class LoginController extends Controller
                 ];
             }
         }
-
         return $response;
     }
 

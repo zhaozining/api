@@ -59,7 +59,6 @@ class TeasController extends Controller
         $data=[
             'name'=>'ning',
             'sex'=>"男",
-
         ];
         $ji="my";
         Redis::hmset($ji,$data);
@@ -73,14 +72,14 @@ class TeasController extends Controller
     }
 
     //添加库存
-    public function num(){
-        $array=[
-            "me"=>"我",
-            "like"=>"喜欢",
-            "free"=>"自由"
-        ];
-        $data="I";
-        Redis::hmset($data,$array);
-    }
+//    public function num(){
+//        $array=[
+//            "me"=>"我",
+//            "like"=>"喜欢",
+//            "free"=>"自由"
+//        ];
+//        $data="I";
+//        Redis::hmset($data,$array);
+//    }
 
 }

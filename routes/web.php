@@ -22,15 +22,15 @@ Route::any("/www","Ce\TeasController@www");
 
 //登录
 Route::get("/login","User\LoginController@login");
-Route::post("/logindo","User\LoginController@logindo");
+Route::post("/logindo","User\LoginController@logindo")->middleware("viewcount");
 
 //注册
 Route::get("/register","User\RegisterController@register");
-Route::post("/registerdo","User\RegisterController@registerdo");
+Route::post("/registerdo","User\RegisterController@registerdo")->middleware("viewcount");
 
 //个人中心
-Route::get("/userCenter","User\LoginController@userCenter");
+Route::get("/userCenter","User\LoginController@userCenter")->middleware("viewcount");
 
 //哈希
-Route::get("/hash","Ce\TeasController@hash");
+Route::get("/hash","Ce\TeasController@hash")->middleware("viewcount");
 Route::get("/hash2","Ce\TeasController@hash2");
