@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Redis;
 
-class ViewCount
+class Token
 {
     /**
      * Handle an incoming request.
@@ -18,21 +18,27 @@ class ViewCount
     {
         //token
         $token = $request->get('token');
-
-        //黑名单
-        $blank="blank";
-       $count=Redis::incr($blank,1);
-        if($count>30){
+        if(empty($token)){
             $response=[
-                'error'=>50004,
-                'msg'=>"访问次数超过3十次，请从新登录"
+                'error'=>"50003",
+                "msg"=>"未授权"
             ];
-            Redis::sadd($blank,$token);
             return response()->json($response);
         }
 
+        $tokenm='token';
+        $time=Redis::hgetall($tokenm);
 
+        $times=time()-$time['time'];
+       
 
+        if($times>7200){
+            $response=[
+                'error'=>50004,
+                'msg'=>"授权失败"
+            ];
+            return response()->json($response);
+        }
 
         return $next($request);
     }

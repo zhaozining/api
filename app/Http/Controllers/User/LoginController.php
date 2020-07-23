@@ -33,8 +33,11 @@ class LoginController extends Controller
                         $response=[
                             "error"=>0,
                             "msg"=>"Ok,登录成功",
-                            "token"=>$tokens->token
+                            "token"=>$tokens->token,
+                            'time'=>time()
                         ];
+                        $tokenm="token";
+                        Redis::hmset($tokenm,$response);
                     }else{
                         $response=[
                             "error"=>50001,
@@ -46,8 +49,11 @@ class LoginController extends Controller
                         $response=[
                             "error"=>0,
                             "msg"=>"Ok,登录成功",
-                            "token"=>$tokens->token
+                            "token"=>$tokens->token,
+                            'time'=>$tokens->time
                         ];
+                        $tokenm="token";
+                        Redis::hmset($tokenm,$response);
                     }else{
                         $response=[
                             "error"=>50001,
@@ -65,11 +71,16 @@ class LoginController extends Controller
                 Token::create($data);
 
                 if($pwd){
+
                     $response=[
                         "error"=>0,
                         "msg"=>"Ok,登录成功",
-                        "token"=>$token
+                        "token"=>$token,
+                        "time"=>time()
                     ];
+                    $tokenm="token";
+                    Redis::hmset($tokenm,$response);
+
                 }else{
                     $response=[
                         "error"=>50001,
