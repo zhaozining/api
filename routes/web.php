@@ -20,6 +20,12 @@ Route::any("/teas1","Ce\TeasController@token1");
 Route::any("/teas2","Ce\TeasController@token2");
 Route::any("/www","Ce\TeasController@www");
 
+//测Http明文加密
+Route::get("/enc","Ce\EncController@enc");//对称
+Route::any("/prienc","Ce\EncController@prienc");//非对称
+Route::any("/signature","Ce\EncController@signature");//签名
+
+
 //登录
 Route::get("/login","User\LoginController@login");
 Route::post("/logindo","User\LoginController@logindo");
@@ -36,3 +42,4 @@ Route::get("/goodsList","Goods\GoodsController@goodsList")->middleware("viewcoun
 //哈希
 Route::get("/hash","Ce\TeasController@hash")->middleware("viewcount");
 Route::get("/hash2","Ce\TeasController@hash2");
+
