@@ -24,6 +24,7 @@ Route::any("/www","Ce\TeasController@www");
 Route::get("/enc","Ce\EncController@enc");//对称
 Route::any("/prienc","Ce\EncController@prienc");//非对称
 Route::any("/signature","Ce\EncController@signature");//签名
+Route::any("/privsign","Ce\EncController@privsign");//非对称签名
 
 
 //登录
@@ -42,4 +43,17 @@ Route::get("/goodsList","Goods\GoodsController@goodsList")->middleware("viewcoun
 //哈希
 Route::get("/hash","Ce\TeasController@hash")->middleware("viewcount");
 Route::get("/hash2","Ce\TeasController@hash2");
+
+//。。。H5。。。
+Route::post("/h5/logindo","H5User\UserController@logindo");//登录
+Route::post("/h5/register","H5User\UserController@register");//注册
+Route::post("/h5/conter","H5User\UserController@conter");//个人中心
+//列表
+Route::any("/h5/lists","Goods\GoodsController@lists");
+//详情
+Route::get("/h5/details","Goods\GoodsController@details");
+//购物车
+Route::get("/h5/cart","Goods\GoodsController@cart");
+
+
 

@@ -58,13 +58,24 @@ class EncController extends Controller
 
     }
 
-
-
     public function signature(){
         $key="api";
         $data="蓝蓝滴天空，清清滴湖水";
         $sign=md5($key.$data);
         $url="http://www.1911.com/signature?data=".$data."&sign=".$sign;
+        $content=file_get_contents($url);
+        echo $content;
+
+    }
+
+    public function privsign(){
+
+        $data="再烦，也别忘了微笑";
+        $key="api";
+        $keypriv=file_get_contents(storage_path("secretKey/priv.key"));
+        $keyprivs=openssl_get_privatekey($keypriv);
+        $sign=openssl_private_encrypt($key.$data,$datas,$keyprivs);
+        $url="http://www.1911.com/privsign?data=".$data."&sign=".$sign;
         $content=file_get_contents($url);
         echo $content;
 
